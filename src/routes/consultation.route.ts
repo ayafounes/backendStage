@@ -1,16 +1,15 @@
 
 import { Hono } from 'hono';
-import { AppointementController } from '../controllers/AppointementControllers';
+import { ConsultationController } from '../controllers/ConsultationControllers';
 
 
 const router = new Hono();
-const appointementController = new AppointementController();
+const consultationController = new ConsultationController();
 
 // Define routes and map them to controller methods
-router.get('/', (c) => appointementController.addAppointement(c));
-router.get('/:id', (c) => appointementController.getAppointementById(c));
-router.post('/', (c) => appointementController.addAppointement(c));
-router.put('/:id', (c) => appointementController.updateAppointement(c));
+router.get('/:id', (c) =>consultationController.getConsultationById(c));
+router.post('/', (c) => consultationController.addConsultation(c));
+router.put('/:id', (c) => consultationController.updateConsultation(c));
 
 export default router;
 

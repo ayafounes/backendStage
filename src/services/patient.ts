@@ -1,3 +1,4 @@
+import { integer } from 'drizzle-orm/pg-core';
 
 import { db } from '../db/connexion';
 import { eq } from 'drizzle-orm';
@@ -31,7 +32,7 @@ export class PatientService {
     postalCode: string;
     allergy: string;
     bloodType: string;
-    medicalRecordNumber: string;
+    medicalRecordNumber: number;
   }) {
     return await db.insert(patient).values(data).returning();
   }

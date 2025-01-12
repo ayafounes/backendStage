@@ -17,5 +17,5 @@ export const patient = pgTable('secretaire', {
     postalCode: text('postalCode').notNull(),
     allergy: text('allergy').notNull(),
     bloodType: text('bloodType').notNull(),
-    medicalRecordNumber: text('medicalRecordNnumber').notNull(),
+    medicalRecordNumber: integer('medicalRecordNnumber').notNull(),
   });
