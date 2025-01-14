@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { serve } from '@hono/node-server'; // For serving Hono app
 import { checkDbConnection } from './db/connexion';  // Adjust path if needed
 import userRoutes from './routes/user.route';  // Adjust path if needed
 import appointementRoutes from './routes/appointement.route';  // Adjust path if needed
@@ -23,5 +24,4 @@ app.get('/', (c) => {
   return c.text('Hello from Hono in Next.js!');
 });
 
-
-
+serve(app);

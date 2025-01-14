@@ -1,8 +1,8 @@
 import { pgTable, serial, text, integer, date } from 'drizzle-orm/pg-core';
 
 
-export const patient = pgTable('secretaire', {
-    idPatient: serial('idPatient').primaryKey(),
+export const patient = pgTable('patient', {
+    idPatient: serial('idPatient').primaryKey().notNull(),
     firstName: text('firstName').notNull(),
     lastName: text('lastName').notNull(),
     birthDate: date('birthDate').notNull(),
@@ -17,5 +17,5 @@ export const patient = pgTable('secretaire', {
     postalCode: text('postalCode').notNull(),
     allergy: text('allergy').notNull(),
     bloodType: text('bloodType').notNull(),
-    medicalRecordNumber: integer('medicalRecordNnumber').notNull(),
+    //medicalRecordNumber: integer('medicalRecordNnumber').notNull(),
   });

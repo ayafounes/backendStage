@@ -8,7 +8,6 @@ const router = new Hono();
 const prescreptionController = new PrescreptionController();
 
 // Define routes and map them to controller methods
-router.get('/', (c) => prescreptionController.addPrescreption(c));
 router.get('/:id', (c) => prescreptionController.getPrescreptionById(c));
 router.post('/', (c) => prescreptionController.addPrescreption(c));
 router.put('/:id', (c) => prescreptionController.updatePrescreption(c));

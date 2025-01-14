@@ -29,14 +29,47 @@ export class PatientController {
 
   async addPatient(c: Context) {
     try {
-      const data = await c.req.json();
-      const newPatient = await patientService.addPatient(data);
-      return c.json(newPatient, 201); //201: new patient created
+      const {
+        firstName,
+        lastName,
+        birthDate,
+        gender,
+        maritalStatus,
+        occupation,
+        email,
+        phone,
+        adress,
+        city,
+        country,
+        postalCode,
+        allergy,
+        bloodType
+      } = await c.req.json(); // Parse JSON payload from request
+  
+      // Omit idPatient as it will be auto-generated
+      await patientService.addPatient({
+        firstName,
+        lastName,
+        birthDate,
+        gender,
+        maritalStatus,
+        occupation,
+        email,
+        phone,
+        adress,
+        city,
+        country,
+        postalCode,
+        allergy,
+        bloodType
+      });
+  
+      return c.json({ message: 'Patient added successfully' }, 201); // Respond with success message
     } catch (error) {
       return c.json({ message: 'Error adding patient', error }, 500);
     }
   }
-
+  
   async updatePatient(c: Context) {
     try {
       const id = Number(c.req.param('id'));// recupere l'id du secretaire a mettere a jour depuis l'url
