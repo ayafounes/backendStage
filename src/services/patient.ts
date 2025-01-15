@@ -13,7 +13,7 @@ export class PatientService {
   }
 
   async getPatientById(id: number) {
-    return await db.select().from(patient).where(eq(patient.idPatient, id));
+    return await db.select().from(patient).where(eq(patient.idPatient, id.toString()));
   }
 
   async addPatient(data: {
@@ -83,6 +83,6 @@ export class PatientService {
       medicalRecordNumber: string;
     }>
   ) {
-    return await db.select().from(patient).where(eq(patient.idPatient, id));
+    return await db.select().from(patient).where(eq(patient.idPatient, id.toString()));
   }
 }

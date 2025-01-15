@@ -1,21 +1,19 @@
-import { pgTable, serial, text, integer, date } from 'drizzle-orm/pg-core';
-
+import { pgTable, text, date, uuid } from 'drizzle-orm/pg-core';
 
 export const patient = pgTable('patient', {
-    idPatient: serial('idPatient').primaryKey().notNull(),
-    firstName: text('firstName').notNull(),
-    lastName: text('lastName').notNull(),
-    birthDate: date('birthDate').notNull(),
-    gender: text('gender').notNull(),
-    maritalStatus: text('maritalStatus').notNull(),
-    occupation: text('occupation').notNull(),
-    email: text('email').notNull(),
-    phone: text('phone').notNull(),
-    adress: text('adress').notNull(),
-    city: text('city').notNull(),
-    country: text('country').notNull(),
-    postalCode: text('postalCode').notNull(),
-    allergy: text('allergy').notNull(),
-    bloodType: text('bloodType').notNull(),
-    //medicalRecordNumber: integer('medicalRecordNnumber').notNull(),
-  });
+  idPatient: uuid('idPatient').primaryKey().defaultRandom(), // Identifiant unique pour chaque patient
+  firstName: text('firstName').notNull(), // Prénom du patient
+  lastName: text('lastName').notNull(), // Nom du patient
+  birthDate: date('birthDate').notNull(), // Date de naissance
+  gender: text('gender').notNull(), // Sexe du patient
+  maritalStatus: text('maritalStatus').notNull(), // Statut marital
+  occupation: text('occupation').notNull(), // Profession du patient
+  email: text('email').notNull(), // Adresse email
+  phone: text('phone').notNull(), // Numéro de téléphone
+  adress: text('adress').notNull(), // Adresse du patient
+  city: text('city').notNull(), // Ville
+  country: text('country').notNull(), // Pays
+  postalCode: text('postalCode').notNull(), // Code postal
+  allergy: text('allergy').notNull(), // Allergies éventuelles
+  bloodType: text('bloodType').notNull(), // Groupe sanguin
+});

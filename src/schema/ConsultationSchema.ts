@@ -1,16 +1,15 @@
-import { pgTable, serial, text, integer, date } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, date, uuid, integer } from 'drizzle-orm/pg-core';
 import { appointement } from './AppointementSchema';
 import { patient } from './PatientSchema';
 
-
 export const consultation = pgTable('consultation', {
-    idConsultation: serial('idConsultation').primaryKey(),
-    idPatient: integer('idPatient').references(() => patient.idPatient),
-    idAppointement: integer('idAppointement').references(() => appointement.idAppointement),
-    dateConsultation: date('dateConsultation').notNull(),
-    diagnostic: text('diagnostic').notNull(),
-    treatment: text('treatment').notNull(),
-    statusPaiement: text('statusPaiement').notNull(),
-    symptoms: text('symptoms').notNull(),
-    cost: serial('cost').notNull()
-  });
+  idConsultation: serial('idConsultation').primaryKey(), // Clé primaire pour la consultation
+  idPatient: uuid('idPatient').references(() => patient.idPatient), // Référence à 'idPatient' de la table 'patient'
+  idAppointement: integer('idAppointement').references(() => appointement.idAppointement), // Référence à 'idAppointement' de la table 'appointement' avec type 'integer'
+  dateConsultation: date('dateConsultation').notNull(), // Date de la consultation
+  diagnostic: text('diagnostic').notNull(), // Diagnostic de la consultation
+  treatment: text('treatment').notNull(), // Traitement prescrit
+  statusPaiement: text('statusPaiement').notNull(), // Statut du paiement
+  symptoms: text('symptoms').notNull(), // Symptômes rapportés
+  cost: integer('cost').notNull(), // Coût de la consultation
+});

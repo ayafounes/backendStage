@@ -7,7 +7,7 @@ const app = new Hono();
 const pool = new Pool({   
   user: 'postgres',
   host: 'localhost',              
-  database: 'TestDB', 
+  database: 'Test', 
   password: 'aya123',  
   port: 5432                  
 });
