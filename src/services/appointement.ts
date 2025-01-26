@@ -18,13 +18,13 @@ export class AppointementService {
 
   async addAppointement(data: {
     
-    dateAppointement: string;
+    dateAppointement:string;
     description: string;
     startTime: string ;
     endTime: string;
     typeAppointement: string;
   }) {
-    return await db.insert(appointement).values(data).returning();
+    return await db.insert(appointement).values({ ...data, idAppointement: 'some-id' }).returning();
   }
 
   async updateAppointement(id: string, data: Partial<{

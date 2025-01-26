@@ -1,6 +1,6 @@
 {
-  "id": "8a3a241e-d963-4211-b11c-0cbe8f521210",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "a665e63c-9fce-4d9f-9c06-e56e555e68b6",
+  "prevId": "8a3a241e-d963-4211-b11c-0cbe8f521210",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -213,12 +213,6 @@
         },
         "treatment": {
           "name": "treatment",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "statusPaiement": {
-          "name": "statusPaiement",
           "type": "text",
           "primaryKey": false,
           "notNull": true

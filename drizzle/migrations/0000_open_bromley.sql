@@ -27,25 +27,15 @@ CREATE TABLE "patient" (
 );
 --> statement-breakpoint
 CREATE TABLE "consultation" (
-	"idConsultation" serial PRIMARY KEY NOT NULL,
+	"idConsultation" uuid PRIMARY KEY NOT NULL,
 	"idPatient" uuid,
-	"idAppointement" serial NOT NULL,
+	"idAppointement" uuid,
 	"dateConsultation" date NOT NULL,
 	"diagnostic" text NOT NULL,
 	"treatment" text NOT NULL,
 	"statusPaiement" text NOT NULL,
 	"symptoms" text NOT NULL,
 	"cost" integer NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE "prescription" (
-	"idPrescription" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"idPatient" uuid,
-	"idConsultation" integer,
-	"datePrescription" date NOT NULL,
-	"nameMedication" text NOT NULL,
-	"typeMedication" text NOT NULL,
-	"signature" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "doctor" (
@@ -60,7 +50,7 @@ CREATE TABLE "doctor" (
 	"city" text NOT NULL,
 	"country" text NOT NULL,
 	"username" text NOT NULL,
-	"mdp" text NOT NULL,
+	"password" text NOT NULL,
 	"role" text NOT NULL,
 	"postalCode" text NOT NULL,
 	"profilePhoto" text
@@ -78,13 +68,12 @@ CREATE TABLE "secretary" (
 	"city" text NOT NULL,
 	"country" text NOT NULL,
 	"username" text NOT NULL,
-	"mdp" text NOT NULL,
+	"password" text NOT NULL,
 	"role" text NOT NULL,
 	"postalCode" text NOT NULL,
 	"profilePhoto" text,
 	"hireDate" date NOT NULL,
-	"employmentStatus" text NOT NULL,
-	"department" text NOT NULL
+	"employmentStatus" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
@@ -99,7 +88,7 @@ CREATE TABLE "user" (
 	"city" text NOT NULL,
 	"country" text NOT NULL,
 	"username" text NOT NULL,
-	"mdp" text NOT NULL,
+	"password" text NOT NULL,
 	"role" text NOT NULL,
 	"postalCode" text NOT NULL,
 	"profilePhoto" text
@@ -107,6 +96,4 @@ CREATE TABLE "user" (
 --> statement-breakpoint
 ALTER TABLE "appointement" ADD CONSTRAINT "appointement_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idAppointement_appointement_idAppointement_fk" FOREIGN KEY ("idAppointement") REFERENCES "public"."appointement"("idAppointement") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "prescription" ADD CONSTRAINT "prescription_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "prescription" ADD CONSTRAINT "prescription_idConsultation_consultation_idConsultation_fk" FOREIGN KEY ("idConsultation") REFERENCES "public"."consultation"("idConsultation") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idAppointement_appointement_idAppointement_fk" FOREIGN KEY ("idAppointement") REFERENCES "public"."appointement"("idAppointement") ON DELETE no action ON UPDATE no action;

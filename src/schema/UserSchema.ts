@@ -1,3 +1,4 @@
+import { password } from 'bun';
 import { pgTable, text, date, uuid, integer } from 'drizzle-orm/pg-core';
 
 // Base user schema
@@ -13,7 +14,7 @@ export const user = pgTable('user', {
   city: text('city').notNull(), // Ville
   country: text('country').notNull(), // Pays
   username: text('username').notNull(), // Nom d'utilisateur
-  mdp: text('mdp').notNull(), // Mot de passe
+  password: text('password').notNull(), // Mot de passe
   role: text('role').notNull(), // Rôle
   postalCode: text('postalCode').notNull(), // Code postal
   profilePhoto: text('profilePhoto') // Photo de profil
@@ -32,7 +33,7 @@ export const doctor = pgTable('doctor', {
   city: text('city').notNull(), // Ville
   country: text('country').notNull(), // Pays
   username: text('username').notNull(), // Nom d'utilisateur
-  mdp: text('mdp').notNull(), // Mot de passe
+  password: text('password').notNull(), // Mot de passe
   role: text('role').notNull(), // Rôle
   postalCode: text('postalCode').notNull(), // Code postal
   profilePhoto: text('profilePhoto'), // Photo de profil
@@ -53,7 +54,7 @@ export const secretary = pgTable('secretary', {
   city: text('city').notNull(), // Ville
   country: text('country').notNull(), // Pays
   username: text('username').notNull(), // Nom d'utilisateur
-  mdp: text('mdp').notNull(), // Mot de passe
+  password: text('password').notNull(), // Mot de passe
   role: text('role').notNull(), // Rôle
   postalCode: text('postalCode').notNull(), // Code postal
   profilePhoto: text('profilePhoto'), // Photo de profil

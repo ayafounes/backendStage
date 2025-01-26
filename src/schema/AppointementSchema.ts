@@ -8,5 +8,7 @@ export const appointement = pgTable('appointement', {
   description: text('description').notNull(), // Description de l'appointement
   startTime: time('startTime').notNull(), // Heure de début de l'appointement
   endTime: time('endTime').notNull(), // Heure de fin de l'appointement
-  typeAppointement: text('typeAppointement').notNull(), // Type d'appointement (par exemple, consultation, suivi, etc.)
+  typeAppointement: text('typeAppointement').notNull(), 
+  
+  // Type d'appointement (par exemple, consultation, suivi, etc.)
 });

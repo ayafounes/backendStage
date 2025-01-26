@@ -23,7 +23,7 @@ export class DoctorService {
     city: string;
     country: string;
     username: string;
-    mdp: string;
+    password: string;
     role: string;
     postalCode: string;
     profilePhoto?: string;
@@ -46,7 +46,7 @@ export class DoctorService {
     city: string;
     country: string;
     username: string;
-    mdp: string;
+    password: string;
     postalCode: string;
     profilePhoto?: string;
   }>) {
@@ -81,7 +81,7 @@ export class SecretaryService {
     city: string;
     country: string;
     username: string;
-    mdp: string;
+    password: string;
     role: string;
     postalCode: string;
     profilePhoto?: string;
@@ -106,7 +106,7 @@ export class SecretaryService {
     city: string;
     country: string;
     username: string;
-    mdp: string;
+    password: string;
     postalCode: string;
     profilePhoto?: string;
     hireDate: string;
