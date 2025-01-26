@@ -1,36 +1,36 @@
 
 import { db } from '../db/connexion';
 import { eq } from 'drizzle-orm';
-import { prescreption } from '../schema/PrescreptionSchema';
+import { prescription } from '../schema/PrescriptionSchema';
 
 export class PrescreptionService {
   static getAllPrescreption() {
       throw new Error('Method not implemented.');
   }
   async getAllPrescreption() {
-    return await db.select().from(prescreption);
+    return await db.select().from(prescription);
   }
 
-  async getPrescreptionById(id: number) {
-    return await db.select().from(prescreption).where(eq(prescreption.idPrescreption, id));
+  async getPrescreptionById(id: string) {
+    return await db.select().from(prescription).where(eq(prescription.idPrescription, id));
   }
 
   async addPrescreption(data: {
-    datePrescreption: string;
+    datePrescription: string;
     nameMedication: string;
     typeMedication: string;
     signature: number;
   }) {
-    return await db.insert(prescreption).values(data).returning();
+    return await db.insert(prescription).values(data).returning();
   }
 
-  async updatePrescreption(id: number, data: Partial<{
+  async updatePrescreption(id: string, data: Partial<{
     datePrescreption: string;
     nameMedication: string;
     typeMedication: string;
     signature: number;
   }>) {
-    return await db.select().from(prescreption).where(eq(prescreption.idPrescreption, id));
+    return await db.select().from(prescription).where(eq(prescription.idPrescription, id));
   }
 
   

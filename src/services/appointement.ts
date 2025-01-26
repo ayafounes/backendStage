@@ -12,12 +12,13 @@ export class AppointementService {
     return await db.select().from(appointement);
   }
 
-  async getAppointementById(id: number) {
+  async getAppointementById(id: string) {
     return await db.select().from(appointement).where(eq(appointement.idAppointement, id));
   }
 
   async addAppointement(data: {
-    dateAppointement:string;
+    
+    dateAppointement: string;
     description: string;
     startTime: string ;
     endTime: string;
@@ -26,7 +27,7 @@ export class AppointementService {
     return await db.insert(appointement).values(data).returning();
   }
 
-  async updateAppointement(id: number, data: Partial<{
+  async updateAppointement(id: string, data: Partial<{
     dateAppointement:string;
     description: string;
     startTime: string ;

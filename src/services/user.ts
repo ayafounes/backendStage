@@ -9,7 +9,7 @@ export class DoctorService {
   }
 
   async getDoctorById(id: number) {
-    return await db.select().from(doctor).where(eq(doctor.id, id));
+    return await db.select().from(doctor).where(eq(doctor.id, id.toString()));
   }
 
   async addDoctor(data: {
@@ -53,7 +53,7 @@ export class DoctorService {
     return await db
       .update(doctor)
       .set(data)
-      .where(eq(doctor.id, id))
+      .where(eq(doctor.id, id.toString()))
       .returning();
   }
 
@@ -67,7 +67,7 @@ export class SecretaryService {
   }
 
   async getSecretaryById(id: number) {
-    return await db.select().from(secretary).where(eq(secretary.id, id));
+    return await db.select().from(secretary).where(eq(secretary.id, id.toString()));
   }
 
   async addSecretary(data: {
@@ -115,7 +115,7 @@ export class SecretaryService {
     return await db
       .update(secretary)
       .set(data)
-      .where(eq(secretary.id, id))
+      .where(eq(secretary.id, id.toString()))
       .returning();
   }
 

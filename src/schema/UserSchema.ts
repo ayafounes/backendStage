@@ -37,9 +37,7 @@ export const doctor = pgTable('doctor', {
   postalCode: text('postalCode').notNull(), // Code postal
   profilePhoto: text('profilePhoto'), // Photo de profil
   // Champs spécifiques au médecin
-  specialization: text('specialization').notNull(), // Spécialisation du médecin
-  licenseNumber: text('licenseNumber').notNull(), // Numéro de licence
-  yearsOfExperience: integer('yearsOfExperience').notNull(), // Années d'expérience
+
 });
 
 // Secretary schema inheriting from user with additional fields
@@ -62,5 +60,5 @@ export const secretary = pgTable('secretary', {
   // Champs spécifiques à la secrétaire
   hireDate: date('hireDate').notNull(), // Date d'embauche
   employmentStatus: text('employmentStatus').notNull(), // Statut d'emploi
-  department: text('department').notNull(), // Département de travail
+
 });

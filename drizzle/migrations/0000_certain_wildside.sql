@@ -1,3 +1,13 @@
+CREATE TABLE "appointement" (
+	"idAppointement" uuid PRIMARY KEY NOT NULL,
+	"idPatient" uuid,
+	"dateAppointement" date NOT NULL,
+	"description" text NOT NULL,
+	"startTime" time NOT NULL,
+	"endTime" time NOT NULL,
+	"typeAppointement" text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "patient" (
 	"idPatient" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"firstName" text NOT NULL,
@@ -18,18 +28,28 @@ CREATE TABLE "patient" (
 --> statement-breakpoint
 CREATE TABLE "consultation" (
 	"idConsultation" serial PRIMARY KEY NOT NULL,
-	"idPatient" integer,
-	"idAppointement" integer,
+	"idPatient" uuid,
+	"idAppointement" serial NOT NULL,
 	"dateConsultation" date NOT NULL,
 	"diagnostic" text NOT NULL,
 	"treatment" text NOT NULL,
 	"statusPaiement" text NOT NULL,
 	"symptoms" text NOT NULL,
-	"cost" serial NOT NULL
+	"cost" integer NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "prescription" (
+	"idPrescription" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"idPatient" uuid,
+	"idConsultation" integer,
+	"datePrescription" date NOT NULL,
+	"nameMedication" text NOT NULL,
+	"typeMedication" text NOT NULL,
+	"signature" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "doctor" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"firstName" text NOT NULL,
 	"lastName" text NOT NULL,
 	"birthDate" date NOT NULL,
@@ -47,7 +67,7 @@ CREATE TABLE "doctor" (
 );
 --> statement-breakpoint
 CREATE TABLE "secretary" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"firstName" text NOT NULL,
 	"lastName" text NOT NULL,
 	"birthDate" date NOT NULL,
@@ -63,11 +83,12 @@ CREATE TABLE "secretary" (
 	"postalCode" text NOT NULL,
 	"profilePhoto" text,
 	"hireDate" date NOT NULL,
-	"employmentStatus" text NOT NULL
+	"employmentStatus" text NOT NULL,
+	"department" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"firstName" text NOT NULL,
 	"lastName" text NOT NULL,
 	"birthDate" date NOT NULL,
@@ -84,5 +105,8 @@ CREATE TABLE "user" (
 	"profilePhoto" text
 );
 --> statement-breakpoint
+ALTER TABLE "appointement" ADD CONSTRAINT "appointement_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idAppointement_appointement_idAppointement_fk" FOREIGN KEY ("idAppointement") REFERENCES "public"."appointement"("idAppointement") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "consultation" ADD CONSTRAINT "consultation_idAppointement_appointement_idAppointement_fk" FOREIGN KEY ("idAppointement") REFERENCES "public"."appointement"("idAppointement") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "prescription" ADD CONSTRAINT "prescription_idPatient_patient_idPatient_fk" FOREIGN KEY ("idPatient") REFERENCES "public"."patient"("idPatient") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "prescription" ADD CONSTRAINT "prescription_idConsultation_consultation_idConsultation_fk" FOREIGN KEY ("idConsultation") REFERENCES "public"."consultation"("idConsultation") ON DELETE no action ON UPDATE no action;

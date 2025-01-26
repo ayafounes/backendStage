@@ -5,9 +5,9 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 const app = new Hono();
 
 const pool = new Pool({   
-  user: 'postgres',
+  user: 'aya',
   host: 'localhost',              
-  database: 'Test', 
+  database: 'test', 
   password: 'aya123',  
   port: 5432                  
 });

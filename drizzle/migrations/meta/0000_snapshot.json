@@ -1,9 +1,78 @@
 {
-  "id": "a0dc9efc-95b8-4ccc-bb6a-ff9d808c31f8",
+  "id": "50c686a5-7eda-4105-a7aa-4f999253eb3a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.appointement": {
+      "name": "appointement",
+      "schema": "",
+      "columns": {
+        "idAppointement": {
+          "name": "idAppointement",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "idPatient": {
+          "name": "idPatient",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dateAppointement": {
+          "name": "dateAppointement",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "startTime": {
+          "name": "startTime",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "endTime": {
+          "name": "endTime",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "typeAppointement": {
+          "name": "typeAppointement",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "appointement_idPatient_patient_idPatient_fk": {
+          "name": "appointement_idPatient_patient_idPatient_fk",
+          "tableFrom": "appointement",
+          "tableTo": "patient",
+          "columnsFrom": [
+            "idPatient"
+          ],
+          "columnsTo": [
+            "idPatient"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.patient": {
       "name": "patient",
       "schema": "",
@@ -120,15 +189,15 @@
         },
         "idPatient": {
           "name": "idPatient",
-          "type": "integer",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
         "idAppointement": {
           "name": "idAppointement",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "dateConsultation": {
           "name": "dateConsultation",
@@ -162,7 +231,7 @@
         },
         "cost": {
           "name": "cost",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         }
@@ -202,15 +271,99 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.prescription": {
+      "name": "prescription",
+      "schema": "",
+      "columns": {
+        "idPrescription": {
+          "name": "idPrescription",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "idPatient": {
+          "name": "idPatient",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "idConsultation": {
+          "name": "idConsultation",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datePrescription": {
+          "name": "datePrescription",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nameMedication": {
+          "name": "nameMedication",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "typeMedication": {
+          "name": "typeMedication",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "signature": {
+          "name": "signature",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "prescription_idPatient_patient_idPatient_fk": {
+          "name": "prescription_idPatient_patient_idPatient_fk",
+          "tableFrom": "prescription",
+          "tableTo": "patient",
+          "columnsFrom": [
+            "idPatient"
+          ],
+          "columnsTo": [
+            "idPatient"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "prescription_idConsultation_consultation_idConsultation_fk": {
+          "name": "prescription_idConsultation_consultation_idConsultation_fk",
+          "tableFrom": "prescription",
+          "tableTo": "consultation",
+          "columnsFrom": [
+            "idConsultation"
+          ],
+          "columnsTo": [
+            "idConsultation"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.doctor": {
       "name": "doctor",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "firstName": {
           "name": "firstName",
@@ -311,9 +464,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "firstName": {
           "name": "firstName",
@@ -410,6 +564,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "department": {
+          "name": "department",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -426,9 +586,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "firstName": {
           "name": "firstName",
